@@ -1,8 +1,24 @@
 version: "3.9"
 services:
-  web:
-    image: php:apache
-    ports:
-      - 80:80
+  # web:
+  #   build: 
+  #     context: ./docker
+  #     dockerfile: web.dockerfile
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./html:/var/www/html
+
+  db:
+    image: mariadb
+    restart: always
     volumes:
-      - ./html:/var/www/html
+     - dbdata:/var/lib/mysql
+   
+    ports:
+     - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: laravel
+volumes:
+  dbdata:
